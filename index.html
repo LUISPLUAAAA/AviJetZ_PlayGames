@@ -98,7 +98,14 @@
 
   <hr>
   <h2>Juegos</h2>
+<!-- Barra de búsqueda -->
+<div style="text-align:center; margin-bottom: 20px;">
+  <input type="text" id="buscador" placeholder="Buscar juego..." 
+         style="padding: 10px; width: 80%; max-width: 400px; border-radius: 6px; border: none; font-size: 16px;">
+</div>
 
+<ul id="lista-juegos">
+  
   <ul>
     <li><strong>Nombre del juego:</strong> <em>Devil My Cry 3 HD</em><br>
       <a class="boton-descarga" href="https://drive.google.com/uc?export=download&id=1Hg94JXR9E57Gv6USGO8lk1LUKAEVY6Po" target="_blank">
@@ -419,7 +426,18 @@
     <a class="boton-descarga" href="https://www.mediafire.com/file/91lcsj0v7tiu8d3/OTL2PCwww.randrogames.com.part2.rar/file">Descargar Parte 2</a><br>
   </li>
 </ul>
+<script>
+  const buscador = document.getElementById('buscador');
+  const juegos = document.querySelectorAll('#lista-juegos li');
 
+  buscador.addEventListener('input', function () {
+    const filtro = buscador.value.toLowerCase();
+    juegos.forEach(juego => {
+      const texto = juego.textContent.toLowerCase();
+      juego.style.display = texto.includes(filtro) ? '' : 'none';
+    });
+  });
+</script>
 </body>
 </html>
 

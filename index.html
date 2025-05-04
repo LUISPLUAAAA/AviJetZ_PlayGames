@@ -2,557 +2,781 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>AviJetZ Zone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AviJetZ_Zone</title>
   <style>
-    body {
-      background-color: #1e1e1e;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #ff6347;
-      text-align: center;
-      font-size: 40px;
-      animation: colorChange 3s infinite alternate;
-    }
-
-    h2 {
-      color: #00cc99; /* Diferente color para el segundo título */
-      text-align: center;
-    }
-
-    @keyframes colorChange {
-      0% {
-        color: #ff6347; /* Rojo tomate */
-      }
-      50% {
-        color: #00ffff; /* Cyan */
-      }
-      100% {
-        color: #00ffcc; /* Verde claro */
-      }
-    }
-
-    a {
-      color: #00ffff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      background-color: #333333;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 8px;
-    }
-
-    .boton-descarga {
-      display: inline-block;
-      background-color: #00cc99;
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-      margin-top: 10px;
-    }
-
-    .boton-descarga:hover {
-      background-color: #00ffaa;
-    }
-        #commento {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      width: 300px;
-      height: auto;
-      z-index: 1000;  /* Asegura que esté por encima de otros elementos */
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; display: flex; flex-direction: column; }
+    a { text-decoration: none; color: inherit; }
+    .link-tool { color: #00ff99; text-decoration: underline; transition: color 0.3s; }
+    .link-tool:hover { color: #fff; }
+    header { background: #1a1a1a; padding: 20px; text-align: center; border-bottom: 2px solid #333; }
+    header h1 { font-size: 2.5rem; color: #00ffff; }
+    header p { margin-top: 8px; color: #aaa; font-size: 1rem; }
+    nav { background: #222; display: flex; justify-content: center; gap: 20px; padding: 10px 0; border-bottom: 1px solid #333; }
+    nav a { color: #fff; padding: 8px 16px; transition: transform 0.3s, background 0.3s; border-radius: 4px; }
+    nav a:hover { background: #00cccc; color: #000; transform: scale(1.1); }
+    section { flex: 1; display: none; padding: 20px; animation: fadeIn 0.5s ease-in-out; }
+    section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .search-bar { width: 100%; max-width: 400px; padding: 10px; margin-bottom: 20px; border: none; border-radius: 4px; }
+    .games-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .games-list li { background: #1e1e1e; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: transform 0.3s; color: #fff; display: flex; flex-direction: column; align-items: center; }
+    .games-list li:hover { transform: translateY(-5px); }
+    .games-list img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; }
+    .min-req { margin: 8px 0; font-size: 0.9rem; color: #ccc; text-align: center; }
+    .boton-descarga { display: inline-block; background: #00cccc; color: #000; padding: 8px 16px; border-radius: 4px; font-weight: bold; margin-top: auto; transition: background 0.3s, transform 0.3s; }
+    .boton-descarga:hover { background: #00ffff; transform: scale(1.05); }
+    footer { text-align: center; padding: 15px; background: #111; border-top: 1px solid #333; font-size: 0.9rem; color: #666; }
+    @media (max-width: 600px) { header h1 { font-size: 2rem; } nav { gap: 10px; } .games-list { grid-template-columns: 1fr; } }
   </style>
 </head>
-  <script defer src="https://cdn.commento.io/js/commento.js"></script>
-<div id="commento"></div>
 <body>
-  <h1>AviJetZ Zone</h1>
-  <h2>AviJetZ PlayGames</h2>
-
-  <p>
-    Para instalar los juegos, necesitas dos aplicaciones esenciales:
-    <ul>
-      <li><strong>WinRAR:</strong> Necesario para descomprimir los archivos .rar. Puedes descargarlo aquí: 
-        <a href="https://www.winrar.es/descargas" target="_blank">Descargar WinRAR</a>.
-        <p>
-    Ojo algunos juegos vienen en formato .RAR, otros son portables y otros son ISO
-  </p>
-      </li>
-      <li><strong>Daemon Tools:</strong> Necesario para montar los archivos ISO y poder instalarlos. Descárgalo desde: 
-        <a href="https://www.daemon-tools.cc/spa/downloads" target="_blank">Descargar Daemon Tools</a>.
-        <p>
-    Una vez que tengas Daemon Tools instalado, simplemente haz doble clic en el archivo ISO del juego que descargaste.
-    Debería aparecer un mensaje como <em>"Se ha insertado un disco"</em>. Después, ve al explorador de archivos y abre el disco montado.
-    Allí encontrarás los archivos del juego, y podrás iniciar la instalación haciendo doble clic en <strong>setup.exe</strong>.
-  </p>
-      </li>
-    </ul>
-  </p>
-
-  <hr>
-  <h2>Juegos</h2>
-<!-- Barra de búsqueda -->
-<div style="text-align:center; margin-bottom: 20px;">
-  <input type="text" id="buscador" placeholder="Buscar juego..." 
-         style="padding: 10px; width: 80%; max-width: 400px; border-radius: 6px; border: none; font-size: 16px;">
-</div>
-
-<ul id="lista-juegos">
-  
-  <ul>
-   <li><strong>Nombre del juego:</strong> <em>Devil May Cry 3 HD</em><br>
-  <img src="https://0game.ir/wp-content/uploads/2020/05/Devil-May-Cry-3.jpg" alt="Devil May Cry 3 HD" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://drive.google.com/uc?export=download&id=1Hg94JXR9E57Gv6USGO8lk1LUKAEVY6Po" target="_blank">
-    Descargar juego
-  </a>
+  <header>
+    <h1>AviJetZ_Zone</h1>
+    <p>AviJetZ_Play Games</p>
+  </header>
+  <nav>
+    <a href="#" onclick="showSection('inicio',event)">Inicio</a>
+    <a href="#" onclick="showSection('alto',event)">Alto Rendimiento</a>
+    <a href="#" onclick="showSection('medio',event)">Medio Rendimiento</a>
+    <a href="#" onclick="showSection('bajo',event)">Bajo Rendimiento</a>
+  </nav>
+  <section id="inicio" class="active">
+    <p>Para instalar los juegos, necesitas dos aplicaciones esenciales:</p>
+    <ul class="games-list">
+   <ul style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+  <li style="text-align: left;">
+    <strong>WinRAR:</strong> Necesario para descomprimir los archivos .rar. <a href="https://www.winrar.es/descargas" target="_blank" class="link-tool">Descargar WinRAR</a>.
+  </li>
+  <li style="text-align: left;">
+    <strong>Daemon Tools:</strong> Necesario para montar archivos ISO <a href="https://www.daemon-tools.cc/spa/downloads" target="_blank" class="link-tool">Descargar Daemon Tools</a>.
+  </li>
+  <li style="text-align: left;">
+    <strong>Torrent:</strong> Algunos juegos son pesados, por eso aquí te dejo cómo descargar por torrent <a href="https://youtu.be/IhMj8FUirLA?si=6v5e_DY-B1P96oBM" target="_blank" class="link-tool">Tutorial Torrent</a>.
+  </li>
+  <li style="text-align: left;">
+    <strong>Tutorial Cómo Instalar Juegos ISO:</strong> Descarga las partes, descomprime, monta el ISO con Daemon Tools, ejecuta el setup.exe e instala. ¡A jugar!
+  </li>
+</ul>
+  </section>
+  <section id="alto">
+    <input type="text" class="search-bar" placeholder="Buscar juegos Alto..." onkeyup="filterGames('alto')">
+    <ul id="alto-list" class="games-list">
+       <li>
+    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/3/12/056d4912-2c7f-43b1-9f56-7d9a243e9ef2.jpg?ect=4g" alt="Horizon Zero Dawn Complete Edition">
+    <strong>Horizon Zero Dawn Complete Edition</strong>
+    <p class="min-req">Requisitos: 
+   Requiere un procesador y un sistema operativo de 64 bits
+SO: Windows 10 64-bits
+Procesador: Intel Core i7-4770K@3.5GHz or Ryzen 5 1500X@3.5GHz
+Memoria: 16 GB de RAM
+Gráficos: Nvidia GeForce GTX 1060 (6 GB) or AMD Radeon RX 580 (8GB)
+DirectX: Versión 12
+Almacenamiento: 100 GB de espacio disponible
+</p>
+  <a class="boton-descarga" href="https://www.pastes.app/p?id=89421873912">Descargar Torrent</a><br>
 </li>
+          <li>
+    <img src="https://image.api.playstation.com/vulcan/ap/rnd/202309/2015/9ee8f4d6e133b039ee90ee0792ac68fa354eff691b904cb0.jpg" alt="Horizon Forbidden West Complete Edition">
+    <strong>Horizon Forbidden West Complete Edition</strong>
+    <p class="min-req">Requisitos: 
+  SO: Windows 10 64-bit (version 1909 or higher)
+Procesador: Intel Core i5-8600 or AMD Ryzen 5 3600
+Memoria: 16 GB de RAM
+Gráficos: NVIDIA GeForce RTX 3060 or AMD Radeon RX 5700
+Almacenamiento: 150 GB de espacio disponible
 
-<li>
-  <strong>Nombre del juego:</strong> 
-  <em>Cuphead: The Delicious Last Course</em><br>
-  <img src="https://3.bp.blogspot.com/-SUtlWCzT85Q/Wjk1eQHbIqI/AAAAAAAAEgE/RDuvV11OLeInZa2Kkp0YRPpulVWVgmAQgCLcBGAs/s400/descargar-cuphead-dont-deal-with-the-devil-pc-mega-mf-espanol-1-link-portable-full-google-drive-bajarjuegospcgratis-iso.png" alt="Cuphead: The Delicious Last Course" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/vwq77cbni7ruo61/Cuphead+The+Delicious+Last+Course+(jijijija098).rar/file" target="_blank">
-    Descargar juego
-  </a>
+</p>
+  <a class="boton-descarga" href="https://www.pastes.app/p?id=126619879300">Descargar Torrent</a><br>
 </li>
+      
+       <li>
+    <img src="https://www.chaynikam.info/prevgame/Fallout_3-ver.jpg" alt="Fallout 3 - Game Of The Year Edition">
+    <strong>Fallout 3 - Game Of The Year Edition</strong>
+    <p class="min-req">Requisitos: 
+    Sistema operativo: Windows XP/Vista
 
-<li><strong>Nombre del juego:</strong> <em>The Elder Scrolls V: SKYRIM</em><br>
-  <img src="https://blog.unipin.com/wp-content/uploads/2021/06/skyrim-legendary-edition-steam.jpg" alt="Skyrim" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://drive.usercontent.google.com/download?id=19sHFNntGs6PnuJuccvKsHZjZZFrb_e4D&export=download&authuser=0" target="_blank">
-    Descargar juego
-  </a>
-</li>
+Procesador: Intel Pentium 4 2.4 GHz o equivalente
 
-<li><strong>Nombre del juego:</strong> <em>Subnautica</em><br>
-  <img src="https://ucuzoyuncun.com/img/oyun-kapak/subnautica-ultimate-collection-kapak.jpg" alt="Subnautica" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/9mtwid9r6qnbyky/Subnticaww.randrogames.com.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
+RAM: 1GB (XP) / 2GB (Vista)
 
-<li><strong>Nombre del juego:</strong> <em>The Forest</em><br>
-  <img src="https://image.api.playstation.com/cdn/EP0238/CUSA12398_00/QABZIx8Ubf69EcsYvaiC1Zx0PPON7XvG.png" alt="The Forest" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/lsqsj5gxokp0lar/Th3F0rest.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
+Tarjeta gráfica: NVIDIA 6800 o ATI X850 con 256MB de VRAM
 
-<li><strong>Nombre del juego:</strong> <em>Sons of The Forest</em><br>
-  <img src="https://www.global-esports.news/wp-content/uploads/2023/02/Sons-of-the-Forest-jpg.webp" alt="Sons of The Forest" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/vt2mj8svrg7jhv4/Sons_of_The_Forestwww.randrogames.com.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
-
-<li><strong>Nombre del juego:</strong> <em>Portal</em><br>
-  <img src="https://repack-igruha.net/uploads/posts/2023-01/1672944381_library_600x900_2x.jpg" alt="Portal" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/v7ikkrk9u47jxcg/potlwww.randrogames.com.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
-
-<li><strong>Nombre del juego:</strong> <em>Proyect Zomboid</em><br>
-  <img src="https://wallpapercave.com/wp/wp10755019.jpg" alt="Project Zomboid" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/zf2fl7r1b85045s/ProyectZomboidwww.randrogames.com.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
-
-<li><strong>Nombre del juego:</strong> <em>Outlast</em><br>
-  <img src="https://wallpaperaccess.com/full/1727670.jpg" alt="Outlast" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/zubatpyfjht5txp/0UT4Lst.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
-
-<li><strong>Nombre del juego:</strong> <em>ManHunt</em><br>
-   <img src="https://rosstoys.com/wp-content/uploads/Manhunt.jpeg" alt="ManHunt" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/wgd9y7igap2ku2g/Manhwww.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-    </a>
-</li>
-
-<li><strong>Nombre del juego:</strong> <em>Hollow Knight</em><br>
-   <img src="https://i.pinimg.com/736x/be/38/41/be38411efe0fee49c149ecf5dfd2e7f0.jpg" alt="Hollow Knigth" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/vziz8uc9kprb8d9/HollNgtwww.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-    </a>
-</li>
-
-<li><strong>Nombre del juego:</strong> <em>Dark Souls II</em><br>
-   <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/Dark-Souls-2-Review.jpg" alt="Dark Souls II" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/tu03gv8ypwslnfz/Dark+Souls+II.rar/file" target="_blank">
-        Descargar juego
-    </a>
-</li>
-
-<li><strong>Nombre del juego:</strong> <em>Assassins Creed Brotherhood</em><br>
-   <img src="https://gepig.com/game_cover_460w/1224.jpg" alt="Assassins Creed Brotherhood" alt="Assassins Creed Brotherhood" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/0rp6vh3vyeeablw/ASCBrotherhwww.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-    </a>
-</li>
-
-<li><strong>Nombre del juego:</strong> <em>Dead Island: Definitive Collection</em><br>
-   <img src="https://cdns.kinguin.net/media/catalog/category/cache/1/image/759x286/17f82f742ffe127f42dca9de82fb58b1/maxresdefault_212.jpg" alt="Dead Island: Definitive Collection"style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/wfwfzsl9dtj8glf/Dead_Island_Definitive_Collection.rar/file" target="_blank">
-        Descargar juego
-    </a>
-</li>
-  
-   <li>
-  <strong>Nombre del juego:</strong> <em>Limbo</em><br>
-     <img src="https://bosgame.ir/wp-content/uploads/2023/03/LIMBO.jpg" alt="Limbo" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/4gwgd5b8oelsiz1/Limbo-www.randrogames.com.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
-
-<li>
-  <strong>Nombre del juego:</strong> <em>Prototype</em><br>
-  <img src="https://wallpaperaccess.com/full/7648226.jpg" alt="Prototype" style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/jkvmakak66mdzax/PR0T0TYP.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
-
-<li>
-  <strong>Nombre del juego:</strong> <em>Undertale</em><br>
-    <img src="https://tiemporeal.periodismoudec.cl/wp-content/uploads/2022/09/1366_2000.png" alt="Undertale"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/shyrejzf7cr2tc2/undertwww.randrogames.com.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
-
-<li>
-  <strong>Nombre del juego:</strong> <em>The Walking Dead: Complete First Season</em><br>
-   <img src="https://upload.mguwp.net/store/TWD/SB.jpg" alt="The Walking Dead: Complete First Season"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/k4gv6lbybgjd9yg/The+Walking+Dead+Complete+First+Season.rar/file" target="_blank">
-    Descargar juego
-  </a>
-</li>
-
-      <li>
-        <strong>Nombre del juego:</strong> <em>Resident Evil 6</em><br>
-        <img src="https://www.cultura.id/wp-content/uploads/2020/10/RE-6-Game-768x432.jpg" alt="Resident Evil 6"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/g5akg73bewqa4j9/Revil6randrogames.com.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    <li>
-      <strong>Nombre del juego:</strong> <em>Far Cry 3 Complete Collection</em><br>
-       <img src="https://pixelz.cc/wp-content/uploads/2018/05/far-cry-3-classic-edition-uhd-8k-wallpaper.jpg" alt="Far Cry 3 Complete Collection"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/972qxd9x7zvvgoj/Far+Cry+3.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-     <li><strong>Nombre del juego:</strong> <em>Bully Scholarship Edition</em><br>
-         <img src="https://alloparadise.s3.eu-west-3.amazonaws.com/products/md/bully-scholarship-edition.png" alt="Bully Scholarship Edition"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/3z8mdoayxzm3voz/Bu11+Sc0larshipp-www.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    
-     <li><strong>Nombre del juego:</strong> <em>Buckshot Roulette ( Version Portable) </em><br>
-       <img src="https://images.igdb.com/igdb/image/upload/t_1080p_2x/co7sfl.jpg" alt="Buckshot Roulette"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/k5ed10pifoz6efy/BKSHTRLTT-PGME-122.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-         <li><strong>Nombre del juego:</strong> <em>Battlefield Vietnam </em><br>
-           <img src="https://i.ytimg.com/vi/cmJxp_l5gyo/hqdefault.jpg" alt="Battlefield Vietnam"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/pa24ezcnc1r1s7u/Battlefield+Vietnam.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    
-         <li><strong>Nombre del juego:</strong> <em>Call Of Duty 4: Modern Warfare </em><br>
-           <img src="https://siaguanta.com/wp-content/uploads/2019/08/call-of-duty-4-modern-warfare-destacada.jpg" alt="Call Of Duty 4: Modern Warfare"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/fcqp77vx9khlcqd/C0_MMWF.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-     <li><strong>Nombre del juego:</strong> <em>Cafe Internet Simulator ( Version Portable) </em><br>
-        <img src="https://games.lol/wp-content/uploads/2023/01/internet-cafe-simulator-pc-full-version.jpg" alt="Cafe Internet Simulator"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/7mq0uilotfxheg7/CafeSwww.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-     <li><strong>Nombre del juego:</strong> <em>Five Nights at Freddys 1 ( Version Portable) </em><br>
-        <img src="https://i.ytimg.com/vi/J8Kjs37UslI/maxresdefault_live.jpg" alt="Five Nights at Freddys 1"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/mi1d7sklgq5kepz/5NightsatFr3ddys1.exe/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-       <li><strong>Nombre del juego:</strong> <em>Five Nights at Freddys 2 ( Version Portable) </em><br>
-          <img src="https://i.3djuegos.com/juegos/11435/five_nights_at_freddy__039_s_2/fotos/ficha/five_nights_at_freddy__039_s_2-5028681.jpg" alt="Five Nights at Freddys 2 "  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/5cdom4tl0nw47lf/Five_Nights_at_Freddy%2527s_2www.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    
-       <li><strong>Nombre del juego:</strong> <em>Five Nights at Freddys 4 + Halloween Edition ( Version Portable) </em><br>
-          <img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co8lk4.jpg" alt="Five Nights at Freddys 4 + Halloween Edition "  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/oyxtz1r2axh9b4a/FFNightFred4www.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-       <li><strong>Nombre del juego:</strong> <em>Half-Life 1 Anthology</em><br>
-          <img src="https://gaming-cdn.com/images/news/articles/3665/cover/1000x563/the-first-half-life-has-never-attracted-so-many-people-on-steam-cover655b1dacc0644.jpg" alt="Half-Life 1 Anthology"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/0738hfzwl5pb5kx/Half_Life_Complete.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    
-       <li><strong>Nombre del juego:</strong> <em>Assassins Creed 2</em><br>
-          <img src="https://zgame.org/images/2/5/novinki_75_1.jpg" alt="Assassins Creed 2"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://mega.nz/file/1YZ1CDxK#Oygc5ASNxAK3UCvlY8StMF7TutQzCMaaWTh2SawzYvA" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-     <li><strong>Nombre del juego:</strong> <em>Assassins Creed 3</em><br>
-        <img src="https://media.senscritique.com/media/000004913247/source_big/Assassin_s_Creed_III_Original_Game_Soundtrack_Bande_Originale.jpg" alt="Assassins Creed 3"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/j04stgewdy6rk0y/ASSCRD3www.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-      <li><strong>Nombre del juego:</strong> <em>Final Fantasy VI</em><br>
-         <img src="https://sm.ign.com/t/ign_es/screenshot/default/final-fantasy-640_udcv.1200.jpg" alt="Final Fantasy VI"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/splpj4tflx46d1g/FinalFantasyVIrandrogames.com.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-     <li><strong>Nombre del juego:</strong> <em>Portal 2</em><br>
-        <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Portal2cover.jpg" alt="Portal 2"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/qjq2vtdcshyfcel/prt2www.randrogames.com.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-     <li><strong>Nombre del juego:</strong> <em>Red Dead Redemption 1</em><br>
-        <img src="https://content.rockstarnews.ru/rdr.jpg" alt="Red Dead Redemption 1"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="hhttps://www.mediafire.com/file/hk22uymkg31bpsg/Red+Dead+Redemption+1.rar/file" target="_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    <li><strong>Nombre del juego:</strong> <em>Schedule I ( Version Portable)</em><br>
-       <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/header.jpg?t=1741142651" alt="Schedule I"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="hhttps://www.mediafire.com/file/i83djxgnhwk8njl/schdlwww.randrogames.com.rar/file"_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    <li><strong>Nombre del juego:</strong> <em>Terraria </em><br>
-       <img src="https://1.bp.blogspot.com/-f5Ysf5a9GyE/Xy7N7O4yi2I/AAAAAAAAASY/-TehmwBlxTMZh2IRsTLcfQDjuhJ2olMmgCLcBGAsYHQ/s445/H2x1_NSwitchDS_Terraria.jpg" alt="Terraria "  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/1wgaj8e5p17yekr/TRRIAwww.randrogames.com.rar/file"_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    
-    <li><strong>Nombre del juego:</strong> <em>Grand Thef Auto San Andreas</em><br>
-       <img src="https://wallpaperaccess.com/full/3662276.jpg" alt="Grand Thef Auto San Andreas"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/almwg0qp68322mk/Gta_San_Andreas_1.0.rar/file"_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    <li><strong>Nombre del juego:</strong> <em>Grand Thef Auto Vice City </em><br>
-       <img src="https://wallpaperbat.com/img/226876-grand-theft-auto-vice-city-hd-wallpaper-background-image.jpg" alt="Grand Thef Auto Vice City"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/2q021ts17gme02h/GTA_V1ce_C1ty_-_Ranloads.rar/file"_blank">
-        Descargar juego
-      </a>
-    </li>
-
-    
-    <li><strong>Nombre del juego:</strong> <em>Left 4 Dead 1 </em><br>
-       <img src="https://www.geekgeneration.fr/wp-content/uploads/2018/07/Left-4-Dead-3.jpg" alt="Left 4 Dead 1"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-      <a class="boton-descarga" href="https://www.mediafire.com/file/rxqou88okd12z0b/LFORD_1.rar/file"_blank">
-        Descargar juego
-      </a>
-    </li>
-
-<li>
-  <strong>Nombre del juego:</strong> <em>God of War 2018</em><br>
-  <img src="https://sakhtafzarmag.com/wp-content/uploads/2016/06/k2_items_src_0480174e0e5012137e2932bc2ad36f7c.jpg" alt="God of War 2018"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  Este juego está dividido en varias partes. Descárgalas todas antes de descomprimir.<br><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/vx2o6wvcv5hn6ed/G0dwww.randrogames.com.part1.rar/file">Descargar Parte 1</a><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/2spx8fn0peiw1of/G0dwww.randrogames.com.part2.rar/file">Descargar Parte 2</a><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/5uegrfx4ji5k3pg/G0dwww.randrogames.com.part3.rar/file">Descargar Parte 3</a><br>
-</li>
-    
-
-<!-- Call Of Duty Black Ops 2 -->
-<li>
-  <strong>Nombre del juego:</strong> <em>Call Of Duty Black Ops 2</em><br>
-    <img src="https://webtudo.net/wp-content/uploads/2012/09/Call-of-Duty-Black-Ops-2-990x557.jpg" alt="Call Of Duty Black Ops 2"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  Este juego está dividido en varias partes. Descárgalas todas antes de descomprimir.<br><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/667tqy63mc724rq/Call+of+Duty+Black+Ops+II.part1.rar/file">Descargar Parte 1</a><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/g0q4tbxecdgee7y/Call+of+Duty+Black+Ops+II.part2.rar/file">Descargar Parte 2</a><br>
-</li>
-    
-   
-
-<!-- Elden Ring Deluxe Edition -->
-<li>
-  <strong>Nombre del juego:</strong> <em>Elden Ring Deluxe Edition</em><br>
-   <img src="https://images.igdb.com/igdb/image/upload/t_720p/co4ioe.jpg" alt="Elden Ring Deluxe Edition"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  Este juego está dividido en varias partes. Descárgalas todas antes de descomprimir.<br><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/l2uktbkiii72r71/ElDRNGDeluxewww.randrogames.com.part1.rar/file">Descargar Parte 1</a><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/mcrf0jyj522rfu3/ElDRNGDeluxewww.randrogames.com.part2.rar/file">Descargar Parte 2</a><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/5iu4rpm4z0438z9/ElDRNGDeluxewww.randrogames.com.part3.rar/file">Descargar Parte 3</a><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/f36ir9jlnf3qe01/ElDRNGDeluxewww.randrogames.com.part4.rar/file">Descargar Parte 4</a><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/z9a4ooszvl8701j/ElDRNGDeluxewww.randrogames.com.part5.rar/file">Descargar Parte 5</a><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/h5h763bhmxvm4v7/ElDRNGDeluxewww.randrogames.com.part6.rar/file">Descargar Parte 6</a><br> 
-  <a class="boton-descarga" href="https://www.mediafire.com/file/xpfrpr529281kgc/ElDRNGDeluxewww.randrogames.com.part7.rar/file">Descargar Parte 7</a><br>   
-</li>
-
-<!-- Fallout 3 GOTY -->
-    <li>
-  <strong>Nombre del juego:</strong> <em>Fallout 3 - Game Of The Year Edition</em><br>
-      <img src="https://www.chaynikam.info/prevgame/Fallout_3-ver.jpg" alt="Fallout 3 - Game Of The Year Edition"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  Este juego está dividido en varias partes. Descárgalas todas antes de descomprimir.<br><br>
+DirectX: 9.0c</p>
   <a class="boton-descarga" href="https://www.mediafire.com/file/vwaq2x8yk89mivt/Fallout+3+Game+of+the+Year+Edition.part1.rar/file">Descargar Parte 1</a><br>
   <a class="boton-descarga" href="https://www.mediafire.com/file/7i9q0l0xnhfnujs/Fallout+3+Game+of+the+Year+Edition.part2.rar/file">Descargar Parte 2</a><br>
 </li>
+       <li>
+    <img src="https://cdn-ext.fanatical.com/production/product/1280x720/781bcc2a-3992-4f8f-a3c1-f00bfb9aa3ea.jpeg" alt="Far Cry 4 Gold Edition">
+    <strong>Far Cry 4 Gold Edition</strong>
+    <p class="min-req">Requisitos:
+    Sistema operativo: Windows 7 SP1, 8 o 8.1 (solo 64-bit)
 
-<!-- Far Cry 4 Gold Edition -->
-      <li>
-  <strong>Nombre del juego:</strong> <em>Far Cry 4 Gold Edition</em><br>
-         <img src="https://cdn-ext.fanatical.com/production/product/1280x720/781bcc2a-3992-4f8f-a3c1-f00bfb9aa3ea.jpeg" alt="Far Cry 4 Gold Edition"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-  Este juego está dividido en varias partes. Descárgalas todas antes de descomprimir.<br><br>
-  <a class="boton-descarga" href="https://www.mediafire.com/file/eub2kfkv31sds04/FRC4GLDwww.randrogames.com.part1.rar/file">Descargar Parte 1</a><br>
+Procesador: Intel Core i5-750 o AMD Phenom II X4 955
+
+RAM: 4GB
+
+Tarjeta gráfica: NVIDIA GeForce GTX 460 o AMD Radeon HD 5850 con 1GB de VRAM
+
+DirectX: 11</p>
+    <a class="boton-descarga" href="https://www.mediafire.com/file/eub2kfkv31sds04/FRC4GLDwww.randrogames.com.part1.rar/file">Descargar Parte 1</a><br>
   <a class="boton-descarga" href="https://www.mediafire.com/file/n3lmhasjin2codr/FRC4GLDwww.randrogames.com.part2.rar/file">Descargar Parte 2</a><br>
 </li>
 
-  <li>
-    <strong>Nombre del juego:</strong> <em>The Last Of Us Parte 2 Remastered</em><br>
-    <img src="https://i.3djuegos.com/juegos/19404/the_last_of_us_parte_2__remastered/fotos/ficha/the_last_of_us_parte_2__remastered-5861102.jpg" alt="The Last Of Us Parte 2 Remastered"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-    Este juego está dividido en varias partes. Descárgalas todas antes de descomprimir.<br><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/ewauecv4kk8eqpi/TLF2www.randrogames.com.part1.rar/file" target="_blank">Descargar Parte 1</a><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/64456v1pq7rm23f/TLF2www.randrogames.com.part2.rar/file" target="_blank">Descargar Parte 2</a><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/vsl9j33rwxyczbi/TLF2www.randrogames.com.part3.rar/file" target="_blank">Descargar Parte 3</a><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/qbjbsn6xrbun85d/TLF2www.randrogames.com.part4.rar/file" target="_blank">Descargar Parte 4</a><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/n2lotki2qoa1g6q/TLF2www.randrogames.com.part5.rar/file" target="_blank">Descargar Parte 5</a><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/r6b4bg6ayc8hltz/TLF2www.randrogames.com.part6.rar/file" target="_blank">Descargar Parte 6</a><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/05v9tbbeu9wdftk/TLF2www.randrogames.com.part7.rar/file" target="_blank">Descargar Parte 7</a><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/j0eixvojh8lx3cv/TLF2www.randrogames.com.part8.rar/file" target="_blank">Descargar Parte 8</a><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/7zlagmgdzw5rhm5/FIX+ESPA%C3%91OL+LATINO+TLOU2.rar/file" target="_blank">Descargar Parte 9</a><br>
-  </li>
+      
+      <li>
+    <img src="https://cdn.mobygames.com/covers/7419290-resident-evil-2-deluxe-edition-playstation-4-front-cover.jpg" alt="Resident Evil 2 2019 Deluxe Edition">
+    <strong>Resident Evil 2 2019 Deluxe Edition</strong>
+    <p class="min-req">Requisitos:
+  Sistema operativo: Windows 7, 8.1, 10 (64-bit)
 
-  <li>
-    <strong>Nombre del juego:</strong> <em>Resident Evil 2 2019 Deluxe Edition</em><br>
-    <img src="https://cdn.mobygames.com/covers/7419290-resident-evil-2-deluxe-edition-playstation-4-front-cover.jpg" alt="Resident Evil 2 2019 Deluxe Edition"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-    Este juego está dividido en varias partes. Descárgalas todas antes de descomprimir.<br><br>
+Procesador: Intel Core i5-4460 o AMD FX-6300
+
+RAM: 8GB
+
+Tarjeta gráfica: NVIDIA GeForce GTX 760 o AMD Radeon R7 260x con 2GB de VRAM
+
+DirectX: 11</p>
     <a class="boton-descarga" href="https://www.mediafire.com/file/ugoupsii9a3st7a/RE22_19www.randrogames.com.part1.rar/file" target="_blank">Descargar Parte 1</a><br>
     <a class="boton-descarga" href="https://www.mediafire.com/file/qauw98g0isjtzc7/RE22_19www.randrogames.com.part2.rar/file" target="_blank">Descargar Parte 2</a><br>
   </li>
+      
+      <li>
+    <img src="https://www.myfacemood.com/wp-content/uploads/2016/06/outlast-2-800x533.jpg" alt="Outlast 2">
+    <strong>Outlast 2</strong>
+    <p class="min-req">Requisitos:
+  Sistema operativo: Windows 7/8/10 (64-bit)
 
-  <li>
-    <strong>Nombre del juego:</strong> <em>Outlast 2</em><br>
-    <img src="https://www.myfacemood.com/wp-content/uploads/2016/06/outlast-2-800x533.jpg" alt="Outlast 2"  style="width: 200px; height: auto; border-radius: 8px; margin-top: 10px;">
-  <br>
-    Este juego está dividido en varias partes. Descárgalas todas antes de descomprimir.<br><br>
-    <a class="boton-descarga" href="https://www.mediafire.com/file/58irnfecpvkcamh/OTL2PCwww.randrogames.com.part1.rar/file">Descargar Parte 1</a><br>
+Procesador: Intel Core i3-530
+
+RAM: 4GB
+
+Tarjeta gráfica: 1GB VRAM (NVIDIA GeForce GTX 260 o AMD Radeon HD 4870)
+
+DirectX: 10</p>
+     <a class="boton-descarga" href="https://www.mediafire.com/file/58irnfecpvkcamh/OTL2PCwww.randrogames.com.part1.rar/file">Descargar Parte 1</a><br>
     <a class="boton-descarga" href="https://www.mediafire.com/file/91lcsj0v7tiu8d3/OTL2PCwww.randrogames.com.part2.rar/file">Descargar Parte 2</a><br>
   </li>
+<li>
+    <img src="https://images.igdb.com/igdb/image/upload/t_720p/co4ioe.jpg" alt="Elden Ring Deluxe Edition">
+    <strong>Elden Ring Deluxe Edition</strong>
+    <p class="min-req">Requisitos: 
+    SO: Windows 10/11
+Procesador: Intel Core i7-8700K o AMD Ryzen 5 3600X
+Memoria: 16 GB de RAM
+Gráficos: NVIDIA GeForce GTX 1070 8 GB o AMD Radeon RX Vega 56 8 GB
+DirectX: Versión 12
+Almacenamiento: 60 GB de espacio disponible</p>
+    <a class="boton-descarga" href="https://upfion.com/cjac80" target="_blank">Descargar Via Torrent</a>
+</li>
+        <li>
+        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/header.jpg?t=1741142651" alt="Schedule I ( Version Portable)">
+        <strong>Schedule I ( Version Portable)</strong>
+        <p class="min-req">Requisitos:
+        Requiere un procesador y un sistema operativo de 64 bits
+SO: Windows 10 (64-bit)
+Procesador: 3.5GHz 6-Core or similar
+Memoria: 16 GB de RAM
+Gráficos: GeForce RTX 3060 or Radeon RX 6700
+Almacenamiento: 8 GB de espacio disponible</p>
+        <a class="boton-descarga" href="hhttps://www.mediafire.com/file/i83djxgnhwk8njl/schdlwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+          <li>
+        <img src="https://games.lol/wp-content/uploads/2023/01/internet-cafe-simulator-pc-full-version.jpg" alt="Cafe Internet Simulator ( Version Portable)">
+        <strong>Cafe Internet Simulator ( Version Portable)</strong>
+        <p class="min-req">Requisitos:
+        SO: Windows 10
+Procesador: 2.5 GHz Dual Core CPU
+Memoria: 4 GB de RAM
+Gráficos: Geforce GTX 970/Radeon RX470 or better
+Almacenamiento: 5 GB de espacio disponible</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/7mq0uilotfxheg7/CafeSwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      <li>
+        <img src="https://upload.mguwp.net/store/TWD/SB.jpg" alt="The Walking Dead: Complete First Season">
+        <strong>The Walking Dead: Complete First Season</strong>
+        <p class="min-req">Requisitos:
+Sistema operativo: Windows XP/Vista/7
 
-<footer style="text-align: center; margin-top: 40px; font-size: 14px; color: #666;">
-  &copy; 2025 AviJetZ_Zone. Todos los derechos reservados.<br>
-  Esta página fue creada por <strong>AviJetZ</strong> con fines personales. El contenido está protegido por derechos de autor.
+Procesador: 2.0 GHz
+
+Memoria RAM: 3 GB
+
+Gráficos: ATI / NVIDIA con 512 MB VRAM
+
+Almacenamiento: 2 GB libres </p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/k4gv6lbybgjd9yg/The+Walking+Dead+Complete+First+Season.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+      <li>
+        <img src="https://media.senscritique.com/media/000004913247/source_big/Assassin_s_Creed_III_Original_Game_Soundtrack_Bande_Originale.jpg" alt="Assassins Creed 3">
+        <strong>Assassins Creed 3</strong>
+        <p class="min-req">Requisitos:
+Sistema operativo: Windows Vista/7/8
+
+Procesador: Intel Core 2 Duo E8200 @ 2.6 GHz o AMD Athlon II X4 620
+
+Memoria RAM: 2 GB
+
+Gráficos: NVIDIA GeForce 8800 GT o ATI Radeon HD 4850
+
+Almacenamiento: 17 GB libres </p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/j04stgewdy6rk0y/ASSCRD3www.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+      <li>
+        <img src="https://www.global-esports.news/wp-content/uploads/2023/02/Sons-of-the-Forest-jpg.webp" alt="Sons of The Forest">
+        <strong>Sons of The Forest</strong>
+        <p class="min-req">Requisitos:
+Memoria RAM: 8 GB
+
+Procesador: Intel Core i5
+
+Gráficos: NVIDIA GTX 760</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/vt2mj8svrg7jhv4/Sons_of_The_Forestwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+    </ul>
+  </section>
+  <section id="medio">
+    <input type="text" class="search-bar" placeholder="Buscar juegos Medio..." onkeyup="filterGames('medio')">
+    <ul id="medio-list" class="games-list">
+        <li>
+        <img src="https://content.rockstarnews.ru/rdr.jpg" alt="Red Dead Redemption 1">
+        <strong>Red Dead Redemption 1</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i7-9700K / AMD Ryzen 7 3700X
+
+RAM: 16 GB
+
+GPU: NVIDIA GTX 1660 / RTX 2060 o equivalente AMD
+
+Almacenamiento: SSD (mejora mucho los tiempos de carga)
+
+Emulador: RPCS3 con Vulkan (mejor compatibilidad que Xenia)</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/hk22uymkg31bpsg/Red+Dead+Redemption+1.rar/file" target="_blank">Descargar</a>
+      </li>
+       <li>
+        <img src="https://pixelz.cc/wp-content/uploads/2018/05/far-cry-3-classic-edition-uhd-8k-wallpaper.jpg" alt="Far Cry 3 Complete Collection">
+        <strong>Far Cry 3 Complete Collection</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core i3-530 / AMD Phenom II X2 o superior
+
+RAM: 6 GB
+
+GPU: NVIDIA GTX 480 / AMD Radeon HD 5770 con 1 GB VRAM
+
+SO: Windows 7/8/10 (64-bit)
+
+Almacenamiento: 15 GB libres</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/972qxd9x7zvvgoj/Far+Cry+3.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+       <li>
+        <img src="https://www.cultura.id/wp-content/uploads/2020/10/RE-6-Game-768x432.jpg" alt="Resident Evil 6">
+        <strong>Resident Evil 6</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i5-3570 / AMD FX-8350
+
+RAM: 8 GB
+
+GPU: NVIDIA GTX 650 / AMD Radeon HD 7770
+
+SO: Windows 7/8/10 (64-bit)
+
+Almacenamiento: 16 GB libres</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/g5akg73bewqa4j9/Revil6randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+        <li>
+        <img src="https://wallpaperaccess.com/full/7648226.jpg" alt="Prototype">
+        <strong>Prototype</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core 2 Quad 2.7 GHz
+
+RAM: 4 GB
+
+GPU: NVIDIA GeForce 8800 GT / ATI Radeon HD 2900
+
+SO: Windows XP/Vista/7
+
+Almacenamiento: 8 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/jkvmakak66mdzax/PR0T0TYP.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+       <li>
+        <img src="https://cdns.kinguin.net/media/catalog/category/cache/1/image/759x286/17f82f742ffe127f42dca9de82fb58b1/maxresdefault_212.jpg" alt="Dead Island: Definitive Collection">
+        <strong>Dead Island: Definitive Collection</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core i5-4670K / AMD FX-8350
+
+RAM: 8 GB
+
+GPU: NVIDIA GeForce GTX 780 / AMD Radeon R9 290
+
+SO: Windows 7/8/10 (64-bit)
+
+Almacenamiento: 20 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/wfwfzsl9dtj8glf/Dead_Island_Definitive_Collection.rar/file" target="_blank">Descargar</a>
+      </li>
+      <li>
+        <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/Dark-Souls-2-Review.jpg" alt="Dark Souls II">
+        <strong>Dark Souls II</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i5-2500 / AMD FX-6300
+
+RAM: 6 GB
+
+GPU: NVIDIA GeForce GTX 750 / AMD Radeon HD 7850
+
+SO: Windows 7/8/10 (64-bit)
+
+Almacenamiento: 23 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/tu03gv8ypwslnfz/Dark+Souls+II.rar/file" target="_blank">Descargar</a>
+      </li>
+            <li>
+        <img src="https://i.pinimg.com/736x/be/38/41/be38411efe0fee49c149ecf5dfd2e7f0.jpg" alt="Hollow Knight">
+        <strong>Hollow Knight</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i5
+
+RAM: 8 GB
+
+GPU: NVIDIA GTX 560 / AMD Radeon HD 5770
+
+SO: Windows 7/8/10
+
+Almacenamiento: 9 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/vziz8uc9kprb8d9/HollNgtwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+       <li>
+        <img src="https://gepig.com/game_cover_460w/1224.jpg" alt="Assassins Creed Brotherhood">
+        <strong>Assassins Creed Brotherhood</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core 2 Duo E8200 / AMD Athlon II X2 240
+
+RAM: 4 GB
+
+GPU: NVIDIA GeForce 8800 GT / AMD Radeon HD 4850
+
+SO: Windows 7/8/10
+
+Almacenamiento: 8 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/0rp6vh3vyeeablw/ASCBrotherhwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      <li>
+        <img src="https://blog.unipin.com/wp-content/uploads/2021/06/skyrim-legendary-edition-steam.jpg" alt="Skyrim">
+        <strong>The Elder Scrolls V: SKYRIM</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i5-750 / AMD Phenom II X4
+
+RAM: 4 GB
+
+GPU: NVIDIA GTX 260 / ATI Radeon 4890
+
+SO: Windows 7/8/10
+
+Almacenamiento: 6 GB
+
+</p>
+        <a class="boton-descarga" href="https://drive.usercontent.google.com/download?id=19sHFNntGs6PnuJuccvKsHZjZZFrb_e4D&export=download&authuser=0" target="_blank">Descargar</a>
+      </li>
+       <li>
+        <img src="https://ucuzoyuncun.com/img/oyun-kapak/subnautica-ultimate-collection-kapak.jpg" alt="Subnautica">
+        <strong>Subnautica</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel i5-4570 / AMD Ryzen 3 2200G
+
+RAM: 8 GB
+
+GPU: GTX 550 Ti / AMD Radeon 7750
+
+SO: Windows 7/8/10 (64-bit)
+
+Almacenamiento: 20 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/9mtwid9r6qnbyky/Subnticaww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+       <li>
+        <img src="https://image.api.playstation.com/cdn/EP0238/CUSA12398_00/QABZIx8Ubf69EcsYvaiC1Zx0PPON7XvG.png" alt="The Forest">
+        <strong>The Forest</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i5-6600K
+
+RAM: 8 GB
+
+GPU: NVIDIA GTX 970 / AMD Radeon R9 380
+
+SO: Windows 7/8/10 (64-bit)
+
+Almacenamiento: 5 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/lsqsj5gxokp0lar/Th3F0rest.rar/file" target="_blank">Descargar</a>
+      </li>
+         <li>
+    <img src="https://0game.ir/wp-content/uploads/2020/05/Devil-May-Cry-3.jpg" alt="Devil May Cry 3 HD">
+    <strong>Devil May Cry 3 HD</strong>
+    <p class="min-req">Requisitos: 
+    CPU: Intel Core 2 Duo 2.4GHz o superior
+
+RAM: 4 GB
+
+GPU: NVIDIA GeForce 9800 GT o equivalente
+
+SO: Windows 7/8/10
+
+Almacenamiento: 7 GB</p>
+    <a class="boton-descarga" href="https://drive.google.com/uc?export=download&id=1Hg94JXR9E57Gv6USGO8lk1LUKAEVY6Po" target="_blank">Descargar</a>
+</li>
+      <li>
+        <img src="https://3.bp.blogspot.com/-SUtlWCzT85Q/Wjk1eQHbIqI/AAAAAAAAEgE/RDuvV11OLeInZa2Kkp0YRPpulVWVgmAQgCLcBGAs/s400/descargar-cuphead-dont-deal-with-the-devil-pc-mega-mf-espanol-1-link-portable-full-google-drive-bajarjuegospcgratis-iso.png" alt="Cuphead"><strong>Cuphead: The Delicious Last Course</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i5
+
+RAM: 8 GB
+
+GPU: GPU con 2 GB VRAM (GTX 660 o similar)
+
+SO: Windows 10
+
+Almacenamiento: 4 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/vwq77cbni7ruo61/Cuphead+The+Delicious+Last+Course+(jijijija098).rar/file" target="_blank">Descargar</a>
+      </li>
+     
+      <li>
+        <img src="https://wallpapercave.com/wp/wp10755019.jpg" alt="Project Zomboid"><strong>Project Zomboid</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel i5-10400 o Ryzen 5
+
+RAM: 8 GB
+
+GPU: GPU dedicada con 2 GB VRAM (GTX 660 o superior)
+
+SO: Windows 10/11
+
+Almacenamiento: 5 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/zf2fl7r1b85045s/ProyectZomboidwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      <li>
+        <img src="https://wallpaperaccess.com/full/1727670.jpg" alt="Outlast"><strong>Outlast</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i5-4440
+
+RAM: 8 GB
+
+GPU: NVIDIA GTX 660 / AMD Radeon HD 7850
+
+SO: Windows 7/8/10
+
+Almacenamiento: 5 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/zubatpyfjht5txp/0UT4Lst.rar/file" target="_blank">Descargar</a>
+      </li>
+     
+    </ul>
+  </section>
+  <section id="bajo">
+    <input type="text" class="search-bar" placeholder="Buscar juegos Bajo..." onkeyup="filterGames('bajo')">
+    <ul id="bajo-list" class="games-list">
+        <li>
+        <img src="https://www.geekgeneration.fr/wp-content/uploads/2018/07/Left-4-Dead-3.jpg" alt="Left 4 Dead 1"><strong>Left 4 Dead 1</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core 2 Duo 2.4GHz
+
+RAM: 2 GB
+
+GPU: NVIDIA GeForce 7600 / ATI Radeon X1600
+
+SO: Windows XP/Vista/7
+
+Almacenamiento: 7 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/rxqou88okd12z0b/LFORD_1.rar/file" target="_blank">Descargar</a>
+      </li>
+           <li>
+        <img src="https://zgame.org/images/2/5/novinki_75_1.jpg" alt="Assassins Creed 2"><strong>Assassins Creed 2</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core 2 Duo E8200 @ 2.6 GHz
+
+RAM: 3 GB
+
+GPU: NVIDIA GeForce 8800 GT / ATI Radeon HD 4700
+
+SO: Windows Vista/7
+
+Almacenamiento: 8 GB</p>
+        <a class="boton-descarga" href="https://mega.nz/file/1YZ1CDxK#Oygc5ASNxAK3UCvlY8StMF7TutQzCMaaWTh2SawzYvA" target="_blank">Descargar</a>
+      </li>
+      
+       <li>
+        <img src="https://alloparadise.s3.eu-west-3.amazonaws.com/products/md/bully-scholarship-edition.png" alt="Bully Scholarship Edition"><strong>Bully Scholarship Edition</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Pentium D / AMD Athlon 64 X2
+
+RAM: 2 GB
+
+GPU: NVIDIA GeForce 8600 / ATI Radeon HD 2600
+
+SO: Windows XP/Vista/7
+
+Almacenamiento: 4.7 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/3z8mdoayxzm3voz/Bu11+Sc0larshipp-www.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+       <li>
+        <img src="https://images.igdb.com/igdb/image/upload/t_1080p_2x/co7sfl.jpg" alt="Buckshot Roulette ( Version Portable)"><strong>Buckshot Roulette ( Version Portable)</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core i3
+
+RAM: 4 GB
+
+GPU: Cualquiera compatible con DirectX 10
+
+SO: Windows 7/10
+
+Almacenamiento: ~500 MB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/k5ed10pifoz6efy/BKSHTRLTT-PGME-122.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+        <li>
+        <img src="https://siaguanta.com/wp-content/uploads/2019/08/call-of-duty-4-modern-warfare-destacada.jpg" alt="Call Of Duty 4: Modern Warfare"><strong>Call Of Duty 4: Modern Warfare</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core 2 Duo E6600 / AMD Dual-Core
+
+RAM: 2 GB
+
+GPU: NVIDIA GeForce 8600GT / ATI Radeon X1950
+
+SO: Windows XP/Vista/7
+
+Almacenamiento: 8 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/fcqp77vx9khlcqd/C0_MMWF.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+        <li>
+        <img src="https://i.ytimg.com/vi/cmJxp_l5gyo/hqdefault.jpg" alt="Battlefield Vietnam"><strong>Battlefield Vietnam</strong>
+        <p class="min-req">Requisitos:
+        CPU: Pentium 4 2.4GHz o equivalente
+
+RAM: 512 MB
+
+GPU: NVIDIA GeForce FX 5700 / ATI Radeon 9600
+
+SO: Windows XP/Vista
+
+Almacenamiento: 3 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/pa24ezcnc1r1s7u/Battlefield+Vietnam.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+      <li>
+        <img src="https://i.ytimg.com/vi/J8Kjs37UslI/maxresdefault_live.jpg" alt="Five Nights at Freddys 1 ( Version Portable)"><strong>Five Nights at Freddys 1 ( Version Portable)</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i3
+
+RAM: 4 GB
+
+GPU: Integrada moderna (Intel HD Graphics 4000 o superior)
+
+SO: Windows 7/8/10
+
+Almacenamiento: 500 MB – 1 GB por juego</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/mi1d7sklgq5kepz/5NightsatFr3ddys1.exe/file" target="_blank">Descargar</a>
+      </li>
+      
+       <li>
+        <img src="https://i.3djuegos.com/juegos/11435/five_nights_at_freddy__039_s_2/fotos/ficha/five_nights_at_freddy__039_s_2-5028681.jpg" alt="Five Nights at Freddys 2 ( Version Portable)"><strong>Five Nights at Freddys 2 ( Version Portable)</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core i3
+
+RAM: 4 GB
+
+GPU: Integrada moderna (Intel HD Graphics 4000 o superior)
+
+SO: Windows 7/8/10
+
+Almacenamiento: 500 MB – 1 GB por juego</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/5cdom4tl0nw47lf/Five_Nights_at_Freddy%2527s_2www.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+       <li>
+        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co8lk4.jpg" alt="Five Nights at Freddys 4 + Halloween Edition ( Version Portable)"><strong>Five Nights at Freddys 4 + Halloween Edition ( Version Portable)</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core i3
+
+RAM: 4 GB
+
+GPU: Integrada moderna (Intel HD Graphics 4000 o superior)
+
+SO: Windows 7/8/10
+
+Almacenamiento: 500 MB – 1 GB por juego</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/oyxtz1r2axh9b4a/FFNightFred4www.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+      <li>
+        <img src="https://gaming-cdn.com/images/news/articles/3665/cover/1000x563/the-first-half-life-has-never-attracted-so-many-people-on-steam-cover655b1dacc0644.jpg" alt="Half-Life 1 Anthology"><strong>Half-Life 1 Anthology</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Pentium 4
+
+RAM: 1 GB
+
+GPU: GPU compatible con DirectX 9
+
+SO: Windows XP/Vista/7
+
+Almacenamiento: ~2 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/0738hfzwl5pb5kx/Half_Life_Complete.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+       <li>
+        <img src="https://sm.ign.com/t/ign_es/screenshot/default/final-fantasy-640_udcv.1200.jpg" alt="Final Fantasy VI"><strong>Final Fantasy VI</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Core i3
+
+RAM: 4 GB
+
+GPU: Intel HD Graphics 4000 o superior
+
+SO: Windows 7/8/10
+
+Almacenamiento: 1 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/splpj4tflx46d1g/FinalFantasyVIrandrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+        <li>
+        <img src="https://repack-igruha.net/uploads/posts/2023-01/1672944381_library_600x900_2x.jpg" alt="Portal"><strong>Portal</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core 2 Duo
+
+RAM: 2 GB
+
+GPU: NVIDIA 8600 / ATI HD 2400
+
+SO: Windows 7/8/10
+
+Almacenamiento: 5 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/v7ikkrk9u47jxcg/potlwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+        <li>
+        <img src="https://1.bp.blogspot.com/-f5Ysf5a9GyE/Xy7N7O4yi2I/AAAAAAAAASY/-TehmwBlxTMZh2IRsTLcfQDjuhJ2olMmgCLcBGAsYHQ/s445/H2x1_NSwitchDS_Terraria.jpg" alt="Terraria"><strong>Terraria</strong>
+        <p class="min-req">Requisitos:
+        CPU: Dual Core 3.0GHz
+
+RAM: 4 GB
+
+GPU: GPU compatible con DirectX 10
+
+SO: Windows 7/8/10
+
+Almacenamiento: 200 MB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/1wgaj8e5p17yekr/TRRIAwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+
+        <li>
+        <img src="https://wallpaperbat.com/img/226876-grand-theft-auto-vice-city-hd-wallpaper-background-image.jpg" alt="Grand Thef Auto Vice City "><strong>Grand Thef Auto Vice City </strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Pentium 4 2.0 GHz
+
+RAM: 1 GB
+
+GPU: NVIDIA GeForce FX / ATI Radeon 9200
+
+SO: Windows XP/Vista/7
+
+Almacenamiento: 2 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/2q021ts17gme02h/GTA_V1ce_C1ty_-_Ranloads.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+        <li>
+        <img src="https://wallpaperaccess.com/full/3662276.jpg" alt="Grand Thef Auto San Andreas"><strong>Grand Thef Auto San Andreas</strong>
+        <p class="min-req">Requisitos:
+        CPU: Intel Pentium 4 o equivalente
+
+RAM: 2 GB
+
+GPU: NVIDIA GeForce 6600 / ATI Radeon 9800
+
+SO: Windows XP/Vista/7
+
+Almacenamiento: 4 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/almwg0qp68322mk/Gta_San_Andreas_1.0.rar/file" target="_blank">Descargar</a>
+      </li>
+      
+       <li>
+        <img src="https://rosstoys.com/wp-content/uploads/Manhunt.jpeg" alt="ManHunt"><strong>ManHunt</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Pentium 4 o superior
+
+RAM: 1 GB
+
+GPU: NVIDIA GeForce FX / ATI Radeon 9600
+
+SO: Windows XP/Vista
+
+Almacenamiento: 2 GB
+
+</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/wgd9y7igap2ku2g/Manhwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      <li>
+        <img src="https://bosgame.ir/wp-content/uploads/2023/03/LIMBO.jpg" alt="Limbo"><strong>Limbo</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core 2 Duo
+
+RAM: 1 GB
+
+GPU: GPU compatible con DirectX 9
+
+SO: Windows 7/8/10
+
+Almacenamiento: 150 MB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/4gwgd5b8oelsiz1/Limbo-www.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      <li>
+        <img src="https://tiemporeal.periodismoudec.cl/wp-content/uploads/2022/09/1366_2000.png" alt="Undertale"><strong>Undertale</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i3
+
+RAM: 4 GB
+
+GPU: Intel HD Graphics o superior
+
+SO: Windows 7/8/10
+
+Almacenamiento: 200 MB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/shyrejzf7cr2tc2/undertwww.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      <li>
+        <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Portal2cover.jpg" alt="Portal 2"><strong>Portal 2</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Dual core 2.0GHz
+
+RAM: 2 GB
+
+GPU: NVIDIA 8600 / ATI X1600
+
+SO: Windows 7/8/10
+
+Almacenamiento: 8 GB</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/qjq2vtdcshyfcel/prt2www.randrogames.com.rar/file" target="_blank">Descargar</a>
+      </li>
+      <li>
+        <img src="https://tiemporeal.periodismoudec.cl/wp-content/uploads/2022/09/1366_2000.png" alt="Five Nights at Freddy’s"><strong>Five Nights at Freddy’s</strong>
+        <p class="min-req">Requisitos: 
+        CPU: Intel Core i3
+
+RAM: 4 GB
+
+GPU: Integrada moderna (Intel HD Graphics 4000 o superior)
+
+SO: Windows 7/8/10
+
+Almacenamiento: 500 MB – 1 GB por juego</p>
+        <a class="boton-descarga" href="https://www.mediafire.com/file/mi1d7sklgq5kepz/5NightsatFr3ddys1.exe/file" target="_blank">Descargar</a>
+      </li>
+    </ul>
+  </section>
+  <footer>© 2025 AviJetZ_Zone. Todos los derechos reservados.
+   Esta página fue creada por <strong>AviJetZ</strong> con fines personales. El contenido está protegido por derechos de autor.
 </footer>
-    
-</ul>
-<script>
-  const buscador = document.getElementById('buscador');
-  const juegos = document.querySelectorAll('#lista-juegos li');
-
-  buscador.addEventListener('input', function () {
-    const filtro = buscador.value.toLowerCase();
-    juegos.forEach(juego => {
-      const texto = juego.textContent.toLowerCase();
-      juego.style.display = texto.includes(filtro) ? '' : 'none';
-    });
-  });
-</script>
+  <script>
+    function showSection(id,event){event.preventDefault();document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+    function filterGames(sec){const f=document.querySelector(`#${sec} .search-bar`).value.toLowerCase();document.querySelectorAll(`#${sec}-list li`).forEach(li=>{li.style.display=li.textContent.toLowerCase().includes(f)?'':'none';});}
+  </script>
 </body>
 </html>
-

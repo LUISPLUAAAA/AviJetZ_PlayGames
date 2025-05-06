@@ -59,6 +59,43 @@
     <a href="#" onclick="showSection('medio',event)">Medio Rendimiento</a>
     <a href="#" onclick="showSection('bajo',event)">Bajo Rendimiento</a>
   </nav>
+  
+  <!-- Cuadro de aceptación de términos -->
+  <div id="terminos">
+    Este sitio utiliza cookies. Al continuar, aceptas nuestros 
+    <a href="#">Términos y Condiciones</a> y 
+    <a href="#">Política de Privacidad</a>.
+    <button onclick="document.getElementById('terminos').style.display='none'">Aceptar</button>
+  </div>
+
+  <style>
+    #terminos {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.95);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      z-index: 9999;
+      font-family: sans-serif;
+    }
+    #terminos a {
+      color: #00d8ff;
+      text-decoration: underline;
+    }
+    #terminos button {
+      background: #00d8ff;
+      color: black;
+      border: none;
+      padding: 8px 15px;
+      margin-left: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
   <section id="inicio" class="active">
     <p>Para instalar los juegos, necesitas dos aplicaciones esenciales:</p>
     <ul class="games-list">

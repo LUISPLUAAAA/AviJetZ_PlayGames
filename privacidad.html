@@ -2,70 +2,333 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Política de Privacidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --secondary: #10b981;
+      --dark: #1f2937;
+      --light: #f9fafb;
+      --gray: #6b7280;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fdfdfd;
-      padding: 40px;
-      color: #333;
-      max-width: 800px;
-      margin: auto;
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+      color: var(--dark);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+
+    header::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      margin: 1.8rem auto;
+      border-radius: 2px;
     }
 
     h1 {
-      color: #4b0082;
-      text-align: center;
-      margin-bottom: 30px;
+      font-family: 'Merriweather', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 1.2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--secondary);
     }
 
     h2 {
-      color: #6a1b9a;
-      margin-top: 30px;
+      font-family: 'Merriweather', serif;
+      color: var(--primary-dark);
+      margin: 2.8rem 0 1.6rem;
+      font-size: 1.8rem;
+      position: relative;
+      padding-left: 1.8rem;
+      transition: var(--transition);
     }
 
-    a {
-      color: #6a1b9a;
-      text-decoration: none;
+    h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      background-color: var(--secondary);
+      border-radius: 50%;
+      transition: var(--transition);
     }
 
-    a:hover {
-      text-decoration: underline;
+    h2:hover {
+      color: var(--primary);
+    }
+
+    h2:hover::before {
+      transform: translateY(-50%) scale(1.4);
+      background-color: var(--primary);
+    }
+
+    p {
+      margin-bottom: 1.4rem;
+      color: var(--gray);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .privacy-content {
+      background-color: white;
+      border-radius: 16px;
+      padding: 3.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .privacy-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    .highlight-card {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2.5rem 0;
+      border: 1px solid rgba(124, 58, 237, 0.1);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(124, 58, 237, 0.1);
     }
 
     footer {
       text-align: center;
-      margin-top: 50px;
-      font-size: 0.9em;
-      color: #777;
+      margin-top: 4.5rem;
+      color: var(--gray);
+      font-size: 0.95rem;
+      animation: fadeIn 1s ease-out 0.3s both;
+    }
+
+    footer p:first-child {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .privacy-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+    }
+
+    .section-icon {
+      position: absolute;
+      right: 2rem;
+      top: 1.5rem;
+      color: rgba(124, 58, 237, 0.1);
+      font-size: 3rem;
+      z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .privacy-content {
+        padding: 2rem 1.5rem;
+      }
+      
+      .highlight-card {
+        padding: 1.5rem;
+      }
+      
+      .section-icon {
+        font-size: 2rem;
+        right: 1rem;
+        top: 1rem;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <div class="privacy-badge">
+        <i class="fas fa-lock"></i> Protección de datos
+      </div>
+      <h1>Política de Privacidad</h1>
+      <p>Tu privacidad es nuestra prioridad. Esta política detalla cómo protegemos y gestionamos tu información personal.</p>
+    </header>
+    
+    <div class="privacy-content">
+      <div class="highlight-card">
+        <p>Nos comprometemos a proteger tu privacidad y tus datos personales. Esta política explica de manera transparente cómo recopilamos, usamos, compartimos y protegemos tu información cuando utilizas nuestros servicios.</p>
+      </div>
 
-  <h1>Política de Privacidad</h1>
+      <div class="privacy-section" style="position: relative;">
+        <i class="fas fa-database section-icon"></i>
+        <h2>1. Datos que recopilamos</h2>
+        <p>Recopilamos información que nos proporcionas directamente, como tu nombre, dirección de correo electrónico y datos de contacto. También podemos recopilar automáticamente cierta información técnica, incluyendo tu dirección IP, tipo de navegador, páginas visitadas y tiempos de acceso.</p>
+      </div>
 
-  <p>Nos comprometemos a proteger tu privacidad y tus datos personales. Esta política explica cómo recopilamos, usamos y protegemos tu información.</p>
+      <div class="privacy-section" style="position: relative;">
+        <i class="fas fa-chart-line section-icon"></i>
+        <h2>2. Uso de la información</h2>
+        <p>Utilizamos tu información para:</p>
+        <ul style="margin-left: 1.5rem; color: var(--gray);">
+          <li>Proporcionar y mejorar nuestros servicios</li>
+          <li>Personalizar tu experiencia de usuario</li>
+          <li>Comunicarnos contigo sobre actualizaciones y ofertas (si has dado tu consentimiento)</li>
+          <li>Analizar el uso del sitio para optimizar su funcionamiento</li>
+          <li>Cumplir con obligaciones legales</li>
+        </ul>
+      </div>
 
-  <h2>1. Datos que recopilamos</h2>
-  <p>Podemos recopilar información como tu nombre, dirección de correo electrónico, dirección IP y datos de navegación.</p>
+      <div class="privacy-section" style="position: relative;">
+        <i class="fas fa-cookie-bite section-icon"></i>
+        <h2>3. Cookies y tecnologías similares</h2>
+        <p>Utilizamos cookies y tecnologías de seguimiento similares para mejorar tu experiencia en nuestro sitio. Estas nos ayudan a recordar tus preferencias, analizar el tráfico del sitio y ofrecer contenido relevante. Puedes gestionar tus preferencias de cookies a través de la configuración de tu navegador.</p>
+      </div>
 
-  <h2>2. Uso de la información</h2>
-  <p>Utilizamos tu información para mejorar el sitio, personalizar la experiencia del usuario y comunicarnos contigo si así lo autorizas.</p>
+      <div class="privacy-section" style="position: relative;">
+        <i class="fas fa-shield-alt section-icon"></i>
+        <h2>4. Seguridad de los datos</h2>
+        <p>Implementamos medidas de seguridad técnicas y organizativas adecuadas para proteger tu información personal contra accesos no autorizados, alteración, divulgación o destrucción. Estas incluyen cifrado, firewalls y controles de acceso estrictos.</p>
+      </div>
 
-  <h2>3. Cookies</h2>
-  <p>Este sitio puede utilizar cookies para almacenar preferencias y estadísticas anónimas de navegación. Puedes desactivarlas desde tu navegador.</p>
+      <div class="privacy-section" style="position: relative;">
+        <i class="fas fa-user-shield section-icon"></i>
+        <h2>5. Derechos del usuario</h2>
+        <p>De acuerdo con la legislación aplicable, tienes derecho a:</p>
+        <ul style="margin-left: 1.5rem; color: var(--gray);">
+          <li>Solicitar acceso a tus datos personales</li>
+          <li>Rectificar información inexacta</li>
+          <li>Solicitar la eliminación de tus datos</li>
+          <li>Limitar el procesamiento de tus datos</li>
+          <li>Oponerte al procesamiento</li>
+          <li>Solicitar la portabilidad de tus datos</li>
+        </ul>
+        <p>Para ejercer estos derechos, por favor contáctanos a través de los medios proporcionados en nuestro sitio.</p>
+      </div>
+    </div>
+    
+    <footer>
+      <p>Última actualización: <strong>Julio 2024</strong></p>
+      <p>© 2024 Todos los derechos reservados | Protección de datos</p>
+    </footer>
+  </div>
 
-  <h2>4. Seguridad</h2>
-  <p>Implementamos medidas de seguridad para proteger tu información personal, pero ningún sistema es 100% seguro.</p>
+  <script>
+    // Animación para las secciones al hacer scroll
+    const animateOnScroll = () => {
+      const sections = document.querySelectorAll('.privacy-section');
+      
+      sections.forEach(section => {
+        const sectionPosition = section.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.2;
+        
+        if (sectionPosition < screenPosition) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }
+      });
+    };
 
-  <h2>5. Derechos del usuario</h2>
-  <p>Puedes solicitar el acceso, modificación o eliminación de tus datos personales contactándonos directamente.</p>
+    // Set initial state
+    document.querySelectorAll('.privacy-section').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
 
-  <footer>
-    Última actualización: Julio 2024
-  </footer>
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
 
+    // Efecto hover para las tarjetas
+    const cards = document.querySelectorAll('.highlight-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.querySelector('p').style.color = 'var(--primary-dark)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.querySelector('p').style.color = 'var(--gray)';
+      });
+    });
+  </script>
 </body>
 </html>

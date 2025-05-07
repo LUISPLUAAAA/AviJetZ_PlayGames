@@ -6,17 +6,20 @@
   <title>Términos y Condiciones</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --secondary: #f59e0b;
-      --dark: #1e293b;
-      --light: #f8fafc;
-      --gray: #64748b;
-      --transition: all 0.3s ease;
+      --neon-purple: #bc13fe;
+      --neon-blue: #1be7ff;
+      --neon-green: #00ff41;
+      --neon-pink: #ff2d75;
+      --dark-bg: #0d0c1d;
+      --darker-bg: #070616;
+      --ui-gray: #a0a0a0;
+      --ui-light: #e0e0e0;
+      --glow: 0 0 10px, 0 0 20px, 0 0 30px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     * {
@@ -26,19 +29,22 @@
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-      color: var(--dark);
+      font-family: 'Oxanium', cursive;
+      background-color: var(--dark-bg);
+      color: var(--ui-light);
       line-height: 1.7;
-      padding: 0;
-      margin: 0;
       min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(27, 231, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(188, 19, 254, 0.05) 0%, transparent 20%),
+        linear-gradient(to bottom, var(--dark-bg), var(--darker-bg));
+      overflow-x: hidden;
     }
 
     .container {
       max-width: 900px;
       margin: 0 auto;
-      padding: 3rem 2rem;
+      padding: 4rem 2rem;
       animation: fadeIn 0.8s ease-out;
     }
 
@@ -47,84 +53,104 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
     header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
       position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(11, 2, 23, 0.8) 0%, transparent 100%);
+      z-index: -1;
     }
 
     header::after {
       content: '';
       display: block;
-      width: 100px;
-      height: 4px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      margin: 1.5rem auto;
+      width: 200px;
+      height: 3px;
+      background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+      margin: 1.8rem auto;
       border-radius: 2px;
+      box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: gradient 8s ease infinite;
-      background-size: 200% 200%;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--neon-green);
+      margin-bottom: 1.2rem;
+      position: relative;
+      display: inline-block;
+      text-shadow: 0 0 5px var(--neon-green);
     }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--neon-blue);
+      box-shadow: 0 0 10px var(--neon-blue);
     }
 
     h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--primary-dark);
-      margin: 2.5rem 0 1.5rem;
-      font-size: 1.8rem;
+      font-family: 'Press Start 2P', cursive;
+      color: var(--neon-blue);
+      margin: 2.8rem 0 1.6rem;
+      font-size: 1.4rem;
       position: relative;
-      display: inline-block;
+      padding-left: 1.8rem;
       transition: var(--transition);
-    }
-
-    h2:hover {
-      color: var(--secondary);
+      text-shadow: 0 0 5px var(--neon-blue);
     }
 
     h2::before {
-      content: '';
+      content: '>>';
       position: absolute;
-      bottom: -8px;
       left: 0;
-      width: 50px;
-      height: 3px;
-      background-color: var(--secondary);
-      transition: var(--transition);
+      top: 0;
+      color: var(--neon-pink);
+      text-shadow: 0 0 5px var(--neon-pink);
     }
 
-    h2:hover::before {
-      width: 100%;
+    h2:hover {
+      color: var(--neon-pink);
+      text-shadow: 0 0 10px var(--neon-pink);
+      transform: translateX(5px);
     }
 
     p {
-      margin-bottom: 1.2rem;
-      color: var(--gray);
+      margin-bottom: 1.4rem;
+      color: var(--ui-gray);
       font-size: 1.05rem;
+      line-height: 1.8;
     }
 
     .terms-content {
-      background-color: white;
-      border-radius: 16px;
-      padding: 3rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      background-color: rgba(13, 12, 29, 0.7);
+      border-radius: 8px;
+      padding: 3.5rem;
+      box-shadow: 0 0 20px rgba(188, 19, 254, 0.2);
       position: relative;
       overflow: hidden;
+      border: 1px solid rgba(27, 231, 255, 0.1);
     }
 
     .terms-content::before {
@@ -132,35 +158,120 @@
       position: absolute;
       top: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(90deg, 
+          transparent 0%, 
+          rgba(27, 231, 255, 0.05) 50%, 
+          transparent 100%);
+      animation: scanline 8s linear infinite;
+      pointer-events: none;
+    }
+
+    .terms-content::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 5px;
       height: 100%;
-      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+      background: linear-gradient(to bottom, var(--neon-purple), var(--neon-blue));
+      box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
+    }
+
+    .highlight-box {
+      background: rgba(27, 231, 255, 0.05);
+      border-radius: 8px;
+      padding: 2rem;
+      margin: 2.5rem 0;
+      border: 1px solid rgba(27, 231, 255, 0.2);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(27, 231, 255, 0.1);
+      border-left: 4px solid var(--neon-purple);
+    }
+
+    .highlight-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(188, 19, 254, 0.05) 0%, 
+        rgba(27, 231, 255, 0.05) 100%);
+      z-index: -1;
+    }
+
+    .highlight-box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--neon-purple), var(--neon-blue));
+      box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
+    }
+
+    .highlight-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(27, 231, 255, 0.3);
+      border-color: var(--neon-blue);
+    }
+
+    .highlight-box:hover p {
+      color: var(--ui-light);
     }
 
     footer {
       text-align: center;
-      margin-top: 4rem;
-      color: var(--gray);
-      font-size: 0.9rem;
+      margin-top: 4.5rem;
+      color: var(--ui-gray);
+      font-size: 0.95rem;
       animation: fadeIn 1s ease-out 0.3s both;
     }
 
-    .scroll-indicator {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 5px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      width: 0%;
-      z-index: 1000;
-      transition: width 0.1s ease;
+    footer p:first-child {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
     }
 
+    .section-icon {
+      position: absolute;
+      right: 2rem;
+      top: 1.5rem;
+      color: rgba(27, 231, 255, 0.2);
+      font-size: 3rem;
+      z-index: 0;
+      transition: var(--transition);
+    }
+
+    .terms-section:hover .section-icon {
+      color: rgba(27, 231, 255, 0.4);
+      text-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    /* Efecto de partículas */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Botón volver arriba */
     .back-to-top {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
       color: white;
       width: 50px;
       height: 50px;
@@ -169,12 +280,13 @@
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
       transition: var(--transition);
       z-index: 999;
+      border: 1px solid var(--neon-blue);
     }
 
     .back-to-top.active {
@@ -183,39 +295,54 @@
     }
 
     .back-to-top:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 0 25px rgba(27, 231, 255, 0.5);
     }
 
-    .highlight-box {
-      background-color: rgba(37, 99, 235, 0.05);
-      border-left: 4px solid var(--primary);
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
-      transition: var(--transition);
-    }
-
-    .highlight-box:hover {
-      transform: translateX(5px);
-      box-shadow: 5px 0 15px rgba(37, 99, 235, 0.1);
+    /* Barra de scroll */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.1s ease;
+      box-shadow: 0 0 10px var(--neon-purple);
     }
 
     @media (max-width: 768px) {
       .container {
-        padding: 2rem 1rem;
+        padding: 2.5rem 1.5rem;
       }
       
       h1 {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.1rem;
       }
       
       .terms-content {
         padding: 2rem 1.5rem;
       }
+      
+      .highlight-box {
+        padding: 1.5rem;
+      }
+      
+      .section-icon {
+        font-size: 2rem;
+        right: 1rem;
+        top: 1rem;
+      }
     }
   </style>
 </head>
 <body>
+  <div id="particles-js"></div>
   <div class="scroll-indicator"></div>
   
   <div class="container">
@@ -229,20 +356,35 @@
         <p>Bienvenido a nuestro sitio web. Al acceder y utilizar este sitio, aceptas cumplir con los siguientes términos y condiciones. Si no estás de acuerdo con alguna parte de estos términos, por favor no utilices nuestro sitio.</p>
       </div>
 
-      <h2><i class="fas fa-laptop"></i> 1. Uso del sitio</h2>
-      <p>Este sitio se proporciona solo para fines informativos. No debes usarlo para actividades ilegales, ofensivas o que infrinjan derechos de terceros. El uso inadecuado del sitio puede resultar en la terminación de tu acceso.</p>
+      <div class="terms-section" style="position: relative;">
+        <i class="fas fa-laptop section-icon"></i>
+        <h2>1. Uso del sitio</h2>
+        <p>Este sitio se proporciona solo para fines informativos. No debes usarlo para actividades ilegales, ofensivas o que infrinjan derechos de terceros. El uso inadecuado del sitio puede resultar en la terminación de tu acceso.</p>
+      </div>
 
-      <h2><i class="fas fa-copyright"></i> 2. Propiedad intelectual</h2>
-      <p>Todo el contenido presente en el sitio, incluyendo textos, imágenes, logos, gráficos, diseño y código fuente, está protegido por derechos de autor, marcas registradas y otras leyes de propiedad intelectual. Es propiedad exclusiva de sus respectivos dueños y no puede ser reproducido sin autorización.</p>
+      <div class="terms-section" style="position: relative;">
+        <i class="fas fa-copyright section-icon"></i>
+        <h2>2. Propiedad intelectual</h2>
+        <p>Todo el contenido presente en el sitio, incluyendo textos, imágenes, logos, gráficos, diseño y código fuente, está protegido por derechos de autor, marcas registradas y otras leyes de propiedad intelectual. Es propiedad exclusiva de sus respectivos dueños y no puede ser reproducido sin autorización.</p>
+      </div>
 
-      <h2><i class="fas fa-shield-alt"></i> 3. Limitación de responsabilidad</h2>
-      <p>No garantizamos que el sitio esté siempre disponible o libre de errores. No nos hacemos responsables por pérdidas o daños derivados del uso del sitio o de la imposibilidad de usarlo. Toda la información se proporciona "tal cual" sin garantías de exactitud.</p>
+      <div class="terms-section" style="position: relative;">
+        <i class="fas fa-shield-alt section-icon"></i>
+        <h2>3. Limitación de responsabilidad</h2>
+        <p>No garantizamos que el sitio esté siempre disponible o libre de errores. No nos hacemos responsables por pérdidas o daños derivados del uso del sitio o de la imposibilidad de usarlo. Toda la información se proporciona "tal cual" sin garantías de exactitud.</p>
+      </div>
 
-      <h2><i class="fas fa-sync-alt"></i> 4. Modificaciones</h2>
-      <p>Nos reservamos el derecho de actualizar, modificar o reemplazar cualquier parte de estos términos en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio. Es tu responsabilidad revisar periódicamente esta página para estar al tanto de las actualizaciones.</p>
+      <div class="terms-section" style="position: relative;">
+        <i class="fas fa-sync-alt section-icon"></i>
+        <h2>4. Modificaciones</h2>
+        <p>Nos reservamos el derecho de actualizar, modificar o reemplazar cualquier parte de estos términos en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio. Es tu responsabilidad revisar periódicamente esta página para estar al tanto de las actualizaciones.</p>
+      </div>
 
-      <h2><i class="fas fa-exclamation-triangle"></i> 5. Responsabilidad</h2>
-      <p>No nos hacemos responsables por daños técnicos a tu dispositivo, pérdida de datos o cualquier otro perjuicio derivado del uso de este sitio web. Recomendamos mantener software de seguridad actualizado y realizar copias de seguridad periódicas.</p>
+      <div class="terms-section" style="position: relative;">
+        <i class="fas fa-exclamation-triangle section-icon"></i>
+        <h2>5. Responsabilidad</h2>
+        <p>No nos hacemos responsables por daños técnicos a tu dispositivo, pérdida de datos o cualquier otro perjuicio derivado del uso de este sitio web. Recomendamos mantener software de seguridad actualizado y realizar copias de seguridad periódicas.</p>
+      </div>
     </div>
     
     <footer>
@@ -255,56 +397,177 @@
     <i class="fas fa-arrow-up"></i>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // Scroll indicator
-    window.addEventListener('scroll', () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
-      const scrollPercentage = (scrolled / scrollable) * 100;
-      document.querySelector('.scroll-indicator').style.width = `${scrollPercentage}%`;
-    });
-
-    // Back to top button
-    const backToTopButton = document.querySelector('.back-to-top');
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('active');
-      } else {
-        backToTopButton.classList.remove('active');
-      }
-    });
-
-    backToTopButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    // Efecto de partículas
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {
+            "value": 80,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": ["#bc13fe", "#1be7ff", "#00ff41"]
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+            "polygon": {
+              "nb_sides": 5
+            }
+          },
+          "opacity": {
+            "value": 0.5,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 2,
+              "size_min": 0.1,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#1be7ff",
+            "opacity": 0.2,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 1,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+              "enable": false,
+              "rotateX": 600,
+              "rotateY": 1200
+            }
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "grab"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 140,
+              "line_linked": {
+                "opacity": 0.5
+              }
+            },
+            "push": {
+              "particles_nb": 4
+            }
+          }
+        },
+        "retina_detect": true
       });
-    });
 
-    // Animate elements when they come into view
-    const animateOnScroll = () => {
-      const elements = document.querySelectorAll('h2, .highlight-box');
-      
-      elements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
+      // Barra de scroll
+      window.addEventListener('scroll', () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY;
+        const scrollPercentage = (scrolled / scrollable) * 100;
+        document.querySelector('.scroll-indicator').style.width = `${scrollPercentage}%`;
         
-        if (elementPosition < screenPosition) {
-          element.style.opacity = '1';
-          element.style.transform = 'translateX(0)';
+        // Cambiar color según progreso
+        if (scrollPercentage < 33) {
+          document.querySelector('.scroll-indicator').style.background = `linear-gradient(to right, var(--neon-purple), var(--neon-pink))`;
+        } else if (scrollPercentage < 66) {
+          document.querySelector('.scroll-indicator').style.background = `linear-gradient(to right, var(--neon-pink), var(--neon-blue))`;
+        } else {
+          document.querySelector('.scroll-indicator').style.background = `linear-gradient(to right, var(--neon-blue), var(--neon-green))`;
         }
       });
-    };
 
-    // Set initial state
-    document.querySelectorAll('h2, .highlight-box').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateX(-20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      // Botón volver arriba
+      const backToTopButton = document.querySelector('.back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('active');
+        } else {
+          backToTopButton.classList.remove('active');
+        }
+      });
+
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Animación para las secciones al hacer scroll
+      const animateOnScroll = () => {
+        const sections = document.querySelectorAll('.terms-section, .highlight-box');
+        const windowHeight = window.innerHeight;
+        
+        sections.forEach((section, index) => {
+          const sectionPosition = section.getBoundingClientRect().top;
+          const screenPosition = windowHeight / 1.2;
+          
+          if (sectionPosition < screenPosition) {
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+            
+            // Efecto secuencial
+            section.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+          }
+        });
+      };
+
+      // Set initial state
+      document.querySelectorAll('.terms-section, .highlight-box').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+      });
+
+      window.addEventListener('scroll', animateOnScroll);
+      window.addEventListener('load', animateOnScroll);
+
+      // Efecto hover para las cajas destacadas
+      const boxes = document.querySelectorAll('.highlight-box');
+      boxes.forEach(box => {
+        box.addEventListener('mouseenter', () => {
+          box.querySelector('p').style.color = 'var(--neon-green)';
+          box.querySelector('p').style.textShadow = '0 0 5px var(--neon-green)';
+        });
+        box.addEventListener('mouseleave', () => {
+          box.querySelector('p').style.color = 'var(--ui-gray)';
+          box.querySelector('p').style.textShadow = 'none';
+        });
+      });
     });
-
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('load', animateOnScroll);
   </script>
 </body>
 </html>

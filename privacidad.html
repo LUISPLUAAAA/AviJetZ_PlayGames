@@ -6,16 +6,19 @@
   <title>Política de Privacidad</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #7c3aed;
-      --primary-dark: #5b21b6;
-      --secondary: #10b981;
-      --dark: #1f2937;
-      --light: #f9fafb;
-      --gray: #6b7280;
+      --neon-purple: #bc13fe;
+      --neon-blue: #1be7ff;
+      --neon-green: #00ff41;
+      --neon-pink: #ff2d75;
+      --dark-bg: #0d0c1d;
+      --darker-bg: #070616;
+      --ui-gray: #a0a0a0;
+      --ui-light: #e0e0e0;
+      --glow: 0 0 10px, 0 0 20px, 0 0 30px;
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
@@ -26,11 +29,16 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-      color: var(--dark);
+      font-family: 'Oxanium', cursive;
+      background-color: var(--dark-bg);
+      color: var(--ui-light);
       line-height: 1.7;
       min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(27, 231, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(188, 19, 254, 0.05) 0%, transparent 20%),
+        linear-gradient(to bottom, var(--dark-bg), var(--darker-bg));
+      overflow-x: hidden;
     }
 
     .container {
@@ -45,89 +53,104 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
     header {
       text-align: center;
       margin-bottom: 3.5rem;
       position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(11, 2, 23, 0.8) 0%, transparent 100%);
+      z-index: -1;
     }
 
     header::after {
       content: '';
       display: block;
-      width: 120px;
-      height: 4px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
+      width: 200px;
+      height: 3px;
+      background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
       margin: 1.8rem auto;
       border-radius: 2px;
+      box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
     }
 
     h1 {
-      font-family: 'Merriweather', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--primary-dark);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--neon-green);
       margin-bottom: 1.2rem;
       position: relative;
       display: inline-block;
+      text-shadow: 0 0 5px var(--neon-green);
     }
 
     h1::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -15px;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
+      width: 100px;
       height: 3px;
-      background: var(--secondary);
+      background: var(--neon-blue);
+      box-shadow: 0 0 10px var(--neon-blue);
     }
 
     h2 {
-      font-family: 'Merriweather', serif;
-      color: var(--primary-dark);
+      font-family: 'Press Start 2P', cursive;
+      color: var(--neon-blue);
       margin: 2.8rem 0 1.6rem;
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       position: relative;
       padding-left: 1.8rem;
       transition: var(--transition);
+      text-shadow: 0 0 5px var(--neon-blue);
     }
 
     h2::before {
-      content: '';
+      content: '>>';
       position: absolute;
       left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 8px;
-      height: 8px;
-      background-color: var(--secondary);
-      border-radius: 50%;
-      transition: var(--transition);
+      top: 0;
+      color: var(--neon-pink);
+      text-shadow: 0 0 5px var(--neon-pink);
     }
 
     h2:hover {
-      color: var(--primary);
-    }
-
-    h2:hover::before {
-      transform: translateY(-50%) scale(1.4);
-      background-color: var(--primary);
+      color: var(--neon-pink);
+      text-shadow: 0 0 10px var(--neon-pink);
+      transform: translateX(5px);
     }
 
     p {
       margin-bottom: 1.4rem;
-      color: var(--gray);
+      color: var(--ui-gray);
       font-size: 1.05rem;
       line-height: 1.8;
     }
 
     .privacy-content {
-      background-color: white;
-      border-radius: 16px;
+      background-color: rgba(13, 12, 29, 0.7);
+      border-radius: 8px;
       padding: 3.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 20px rgba(188, 19, 254, 0.2);
       position: relative;
       overflow: hidden;
+      border: 1px solid rgba(27, 231, 255, 0.1);
     }
 
     .privacy-content::before {
@@ -135,20 +158,51 @@
       position: absolute;
       top: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(90deg, 
+          transparent 0%, 
+          rgba(27, 231, 255, 0.05) 50%, 
+          transparent 100%);
+      animation: scanline 8s linear infinite;
+      pointer-events: none;
+    }
+
+    .privacy-content::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 5px;
       height: 100%;
-      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+      background: linear-gradient(to bottom, var(--neon-purple), var(--neon-blue));
+      box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
     }
 
     .highlight-card {
-      background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
-      border-radius: 12px;
+      background: rgba(27, 231, 255, 0.05);
+      border-radius: 8px;
       padding: 2rem;
       margin: 2.5rem 0;
-      border: 1px solid rgba(124, 58, 237, 0.1);
+      border: 1px solid rgba(27, 231, 255, 0.2);
       transition: var(--transition);
       position: relative;
       overflow: hidden;
+      box-shadow: 0 0 15px rgba(27, 231, 255, 0.1);
+    }
+
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(188, 19, 254, 0.05) 0%, 
+        rgba(27, 231, 255, 0.05) 100%);
+      z-index: -1;
     }
 
     .highlight-card::after {
@@ -158,18 +212,20 @@
       left: 0;
       width: 3px;
       height: 100%;
-      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+      background: linear-gradient(to bottom, var(--neon-purple), var(--neon-blue));
+      box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
     }
 
     .highlight-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(124, 58, 237, 0.1);
+      box-shadow: 0 0 25px rgba(27, 231, 255, 0.3);
+      border-color: var(--neon-blue);
     }
 
     footer {
       text-align: center;
       margin-top: 4.5rem;
-      color: var(--gray);
+      color: var(--ui-gray);
       font-size: 0.95rem;
       animation: fadeIn 1s ease-out 0.3s both;
     }
@@ -181,23 +237,55 @@
 
     .privacy-badge {
       display: inline-block;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
       color: white;
-      padding: 0.5rem 1.2rem;
-      border-radius: 50px;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
       font-size: 0.9rem;
       font-weight: 600;
       margin-bottom: 1.5rem;
-      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+      box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
+      font-family: 'Press Start 2P', cursive;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--neon-blue);
     }
 
     .section-icon {
       position: absolute;
       right: 2rem;
       top: 1.5rem;
-      color: rgba(124, 58, 237, 0.1);
+      color: rgba(27, 231, 255, 0.2);
       font-size: 3rem;
       z-index: 0;
+      transition: var(--transition);
+    }
+
+    .privacy-section:hover .section-icon {
+      color: rgba(27, 231, 255, 0.4);
+      text-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      color: var(--ui-gray);
+      list-style-type: none;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--neon-green);
+      text-shadow: 0 0 5px var(--neon-green);
     }
 
     @media (max-width: 768px) {
@@ -206,7 +294,11 @@
       }
       
       h1 {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.1rem;
       }
       
       .privacy-content {
@@ -222,10 +314,27 @@
         right: 1rem;
         top: 1rem;
       }
+
+      .privacy-badge {
+        font-size: 0.7rem;
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    /* Efecto de partículas */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
+  <div id="particles-js"></div>
   <div class="container">
     <header>
       <div class="privacy-badge">
@@ -250,7 +359,7 @@
         <i class="fas fa-chart-line section-icon"></i>
         <h2>2. Uso de la información</h2>
         <p>Utilizamos tu información para:</p>
-        <ul style="margin-left: 1.5rem; color: var(--gray);">
+        <ul>
           <li>Proporcionar y mejorar nuestros servicios</li>
           <li>Personalizar tu experiencia de usuario</li>
           <li>Comunicarnos contigo sobre actualizaciones y ofertas (si has dado tu consentimiento)</li>
@@ -275,7 +384,7 @@
         <i class="fas fa-user-shield section-icon"></i>
         <h2>5. Derechos del usuario</h2>
         <p>De acuerdo con la legislación aplicable, tienes derecho a:</p>
-        <ul style="margin-left: 1.5rem; color: var(--gray);">
+        <ul>
           <li>Solicitar acceso a tus datos personales</li>
           <li>Rectificar información inexacta</li>
           <li>Solicitar la eliminación de tus datos</li>
@@ -293,40 +402,139 @@
     </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // Animación para las secciones al hacer scroll
-    const animateOnScroll = () => {
-      const sections = document.querySelectorAll('.privacy-section');
-      
-      sections.forEach(section => {
-        const sectionPosition = section.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.2;
+    // Efecto de partículas
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {
+            "value": 80,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": ["#bc13fe", "#1be7ff", "#00ff41"]
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+            "polygon": {
+              "nb_sides": 5
+            }
+          },
+          "opacity": {
+            "value": 0.5,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 2,
+              "size_min": 0.1,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#1be7ff",
+            "opacity": 0.2,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 1,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+              "enable": false,
+              "rotateX": 600,
+              "rotateY": 1200
+            }
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "grab"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 140,
+              "line_linked": {
+                "opacity": 0.5
+              }
+            },
+            "push": {
+              "particles_nb": 4
+            }
+          }
+        },
+        "retina_detect": true
+      });
+
+      // Animación para las secciones al hacer scroll
+      const animateOnScroll = () => {
+        const sections = document.querySelectorAll('.privacy-section');
+        const windowHeight = window.innerHeight;
         
-        if (sectionPosition < screenPosition) {
-          section.style.opacity = '1';
-          section.style.transform = 'translateY(0)';
-        }
+        sections.forEach((section, index) => {
+          const sectionPosition = section.getBoundingClientRect().top;
+          const screenPosition = windowHeight / 1.2;
+          
+          if (sectionPosition < screenPosition) {
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+            
+            // Efecto secuencial
+            section.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+          }
+        });
+      };
+
+      // Set initial state
+      document.querySelectorAll('.privacy-section').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
       });
-    };
 
-    // Set initial state
-    document.querySelectorAll('.privacy-section').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
+      window.addEventListener('scroll', animateOnScroll);
+      window.addEventListener('load', animateOnScroll);
 
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('load', animateOnScroll);
-
-    // Efecto hover para las tarjetas
-    const cards = document.querySelectorAll('.highlight-card');
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.querySelector('p').style.color = 'var(--primary-dark)';
-      });
-      card.addEventListener('mouseleave', () => {
-        card.querySelector('p').style.color = 'var(--gray)';
+      // Efecto hover para las tarjetas
+      const cards = document.querySelectorAll('.highlight-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.querySelector('p').style.color = 'var(--ui-light)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.querySelector('p').style.color = 'var(--ui-gray)';
+        });
       });
     });
   </script>

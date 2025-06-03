@@ -95,6 +95,13 @@
   <header>
     <h1>AviJetZ_Zone</h1>
     <p>AviJetZ_Play Games</p>
+    <div style="margin-top: 20px;">
+  <label for="codigo" style="font-size: 1.2rem;">Agregar código:</label><br>
+  <input type="text" id="codigo" placeholder="Ingresa el código" style="padding: 8px; margin-top: 5px; border-radius: 4px; border: none; width: 200px;">
+  <button onclick="verificarCodigo()" style="padding: 8px 16px; margin-left: 10px; background-color: #00cccc; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">Ingresar</button>
+  <p id="mensajeError" style="color: red; margin-top: 10px;"></p>
+</div>
+
   </header>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3253455293243656"
      crossorigin="anonymous"></script>
@@ -971,5 +978,19 @@ Almacenamiento: 8 GB</p>
     function showSection(id,event){event.preventDefault();document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
     function filterGames(sec){const f=document.querySelector(`#${sec} .search-bar`).value.toLowerCase();document.querySelectorAll(`#${sec}-list li`).forEach(li=>{li.style.display=li.textContent.toLowerCase().includes(f)?'':'none';});}
   </script>
+  <script>
+  function verificarCodigo() {
+    const codigoIngresado = document.getElementById("codigo").value;
+    const mensaje = document.getElementById("mensajeError");
+
+    if (codigoIngresado === "303030") {
+      // Cambia esta URL por la página a la que deseas redirigir
+      window.location.href = "https://avijetzplaygames.netlify.app/PAGINAORIGINAL.html";
+    } else {
+      mensaje.textContent = "Código incorrecto. Inténtalo de nuevo.";
+    }
+  }
+</script>
+
 </body>
 </html>

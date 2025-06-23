@@ -89,6 +89,24 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+     .tutorial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  padding: 0;
+}
+@media (max-width: 600px) {
+  .tutorial-grid {
+    grid-template-columns: 1fr;
+  }
+  .tutorial-grid li {
+    margin: 0 auto;
+    width: 90%;
+  }
+}
+
+    
   </style>
 </head>
 <body>
@@ -111,7 +129,8 @@
     <a href="privacidad.html" target="_blank">Política de Privacidad</a>.
     <button onclick="aceptarTerminos()">Aceptar</button>
   </div>
-
+ <!-- Pantalla dis -->
+  
   <!-- Cargando -->
   <div id="cargando">
     <div class="loader"></div>
@@ -138,7 +157,8 @@
 <section id="inicio" class="active">
   <h2 style="color:#00d8ff; margin-bottom: 15px;">Tutorial de Cómo Instalar y Jugar</h2>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;" class="games-list">
+<div class="tutorial-grid">
+
     <li>
       <strong>WinRAR</strong>
       <p>Necesario para descomprimir los archivos .rar.</p>
